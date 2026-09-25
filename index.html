@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>黄色帝国首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(to bottom,
+                #fef3c7 0%,
+                #fef3c7 50%,
+                #ffffff 50%,
+                #ffffff 100%);
+            text-align: center;
+        }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .links a {
+            display: inline-block;
+            font-size: 18px;
+            margin: 10px 20px;
+            color: #222;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .center-text {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            line-height: 1.8;
+        }
+        .back-link {
+            margin-top: 30px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 首页 -->
+    <div class="page active" id="home">
+        <h1>这里是黄色帝国首页</h1>
+        <div class="links">
+            <a href="#trick" onclick="switchPage('trick')">联系我们</a>
+            <a href="#intro" onclick="switchPage('intro')">帝国简介</a>
+            <a href="#book" onclick="switchPage('book')">帝国著作</a>
+        </div>
+    </div>
+
+    <!-- 联系我们页面 -->
+    <div class="page" id="trick">
+        <div class="center-text">
+            <p>地址：上海市静安区茂名北路40号</p>
+            <a href="#home" class="back-link" onclick="switchPage('home')">返回首页</a>
+        </div>
+    </div>
+
+    <!-- 帝国简介页面 -->
+    <div class="page" id="intro">
+        <div class="center-text">
+            <h2>帝国简介</h2>
+            <p>黄色帝国是阴阿姨在2025/9/16日创立的小型组织，共有数十名人次加入。</p>
+            <a href="#home" class="back-link" onclick="switchPage('home')">返回首页</a>
+        </div>
+    </div>
+
+    <!-- 帝国著作页面，内容自行修改 -->
+    <div class="page" id="book">
+        <div class="center-text">
+            <h2>帝国著作</h2>
+            <p>第一首 五言绝句：几把叼币草 奈自插因岛 你问他是谁 就是照玉浩</p>
+            <p>第二首 流浪地球：约个泡 操一操 高速开车ao一ao 千万别带碧云陶</p>
+            <p>第三首 半夜三更：半夜抄作业 撸出了金叶 坐唉被发现 乃投delicious</p>
+            <p>第四首 牛仔很忙：哦啦啦啦火车笛 随着奔腾的比比，这比比真的yummy 朋友来吃个比 吃好比比吃鸡鸡 哦真的哦一西 我真的非常喜欢吃比比</p>
+            <p>第五首 小月巴： 小月巴~ 小月巴~你的几把好大大~就像你的妈妈~放进嘴里塞不下~你千万不要回家~因为你妈妈会ao死你哒~~~</p>
+            <p>第六首 驦押：照玉浩 约个炮 他喜欢吃大-奈子；不要带 碧云陶 所以他得了-艾滋；小阴道 有阴毛 但他非常的-爱吃：欣高吵 射金了 导致他生了-孩子</p>
+            <p>第七首 ......未完待续......</p>
+            <a href="#home" class="back-link" onclick="switchPage('home')">返回首页</a>
+        </div>
+    </div>
+
+<script>
+function switchPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    return false;
+}
+</script>
+</body>
+</html>
