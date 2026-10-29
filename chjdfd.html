@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漕河泾大饭店 · 江北改良本帮菜</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%239b1c1c'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle' fill='%23f3d9a4' font-family='serif'%3E%E9%A5%AD%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#2b1f16;
+    --maroon:#9b1c1c;
+    --maroon-deep:#6e1010;
+    --gold:#d9a441;
+    --gold-light:#f3d9a4;
+    --cream:#faf3e4;
+    --paper:#fffaf0;
+    --line:#e4d4b5;
+    --muted:#7c6a52;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.7;
+  }
+  h1,h2,h3,.serif{font-family:"Noto Serif SC","Songti SC","SimSun",serif;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  /* ===== 顶栏 ===== */
+  header.top{
+    background:var(--maroon-deep);
+    color:var(--gold-light);
+    padding:14px 0;
+    position:sticky;top:0;z-index:20;
+    box-shadow:0 2px 10px rgba(0,0,0,.18);
+  }
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .brand{font-size:22px;font-weight:900;letter-spacing:2px;}
+  .brand span{color:var(--gold);}
+  nav a{
+    color:var(--gold-light);text-decoration:none;margin-left:20px;
+    padding:4px 2px;border-bottom:2px solid transparent;transition:.2s;
+  }
+  nav a:hover{border-color:var(--gold);color:#fff;}
+
+  /* ===== Hero ===== */
+  .hero{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(217,164,65,.15), transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(217,164,65,.12), transparent 40%),
+      linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 60%, #4a0c0c 100%);
+    color:var(--gold-light);
+    text-align:center;
+    padding:80px 24px 70px;
+    position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);
+    width:120px;height:6px;background:var(--gold);border-radius:3px;
+  }
+  .hero .seal{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:64px;height:64px;border-radius:50%;
+    background:var(--gold-light);color:var(--maroon-deep);
+    font-family:serif;font-size:30px;font-weight:900;
+    margin-bottom:20px;box-shadow:0 0 0 4px rgba(217,164,65,.35);
+  }
+  .hero h1{font-size:52px;letter-spacing:6px;font-weight:900;}
+  .hero .sub{font-size:20px;margin-top:14px;color:#f6e6c2;letter-spacing:2px;}
+  .hero .tag{
+    display:inline-block;margin-top:22px;padding:8px 22px;
+    background:rgba(217,164,65,.16);border:1px solid var(--gold);
+    border-radius:999px;font-size:15px;color:var(--gold-light);
+  }
+  .hero .stars{font-size:18px;letter-spacing:6px;margin-top:18px;color:var(--gold);}
+
+  /* ===== 区块 ===== */
+  section{padding:64px 0;}
+  section.alt{background:var(--paper);}
+  .sec-title{text-align:center;margin-bottom:40px;}
+  .sec-title .kicker{
+    display:inline-block;font-size:14px;letter-spacing:4px;color:var(--maroon);
+    border-bottom:2px solid var(--gold);padding-bottom:6px;margin-bottom:14px;
+  }
+  .sec-title h2{font-size:34px;letter-spacing:3px;}
+
+  /* 招牌故事 */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .about-grid p{color:#4a3b2c;margin-bottom:14px;}
+  .about-grid .accent{color:var(--maroon);font-weight:600;}
+  .about-box{
+    background:var(--maroon);color:var(--gold-light);border-radius:14px;
+    padding:30px;text-align:center;box-shadow:0 10px 24px rgba(110,16,16,.25);
+  }
+  .about-box .big{font-size:60px;font-weight:900;color:var(--gold);font-family:serif;}
+  .about-box .lbl{letter-spacing:3px;margin-top:6px;}
+
+  /* 招牌菜 */
+  .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .dish{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:24px;transition:.25s;
+  }
+  .dish:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(43,31,22,.12);border-color:var(--gold);}
+  .dish .name{font-size:20px;font-family:serif;font-weight:700;color:var(--maroon);}
+  .dish .jp{
+    display:inline-block;margin-top:8px;padding:3px 10px;font-size:12px;
+    background:var(--cream);color:var(--muted);border:1px dashed var(--line);border-radius:6px;
+  }
+  .dish .desc{font-size:14px;color:#5d4c38;margin-top:12px;}
+  .dish .price{font-size:14px;color:var(--maroon);margin-top:12px;font-weight:700;}
+
+  /* 硬话宣言 */
+  .manifesto{
+    text-align:center;max-width:720px;margin:0 auto;font-size:20px;
+    font-family:serif;line-height:2.1;
+  }
+  .manifesto b{color:var(--maroon);}
+
+  /* ===== 交互区 ===== */
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .cta-card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:36px 30px;text-align:center;box-shadow:0 6px 18px rgba(43,31,22,.06);
+  }
+  .cta-card h3{font-size:24px;letter-spacing:2px;margin-bottom:10px;}
+  .cta-card p{color:var(--muted);font-size:15px;margin-bottom:22px;}
+
+  .btn{
+    display:inline-block;cursor:pointer;border:none;
+    font-size:18px;font-weight:700;letter-spacing:2px;
+    padding:14px 40px;border-radius:10px;color:#fff;
+    background:linear-gradient(180deg,var(--maroon),var(--maroon-deep));
+    box-shadow:0 6px 14px rgba(155,28,28,.3);
+    transition:.2s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(155,28,28,.4);}
+  .btn:active{transform:translateY(0);}
+
+  /* 反馈输入 */
+  .feedback-form{display:flex;flex-direction:column;gap:14px;align-items:stretch;}
+  .feedback-form textarea{
+    width:100%;min-height:96px;padding:14px;border:1px solid var(--line);
+    border-radius:10px;font-family:inherit;font-size:15px;color:var(--ink);
+    background:var(--cream);resize:vertical;outline:none;
+    font-size:16px;
+  }
+  .feedback-form textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,164,65,.18);}
+  .btn.gold{background:linear-gradient(180deg,var(--gold),#b17f26);box-shadow:0 6px 14px rgba(185,130,38,.3);}
+
+  /* 弹窗提示 */
+  .toast{
+    position:fixed;left:50%;top:30%;transform:translate(-50%,-50%) scale(.9);
+    background:#fff;border:2px solid var(--gold);border-radius:16px;
+    padding:40px 50px;text-align:center;z-index:100;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    opacity:0;pointer-events:none;transition:.25s;
+  }
+  .toast.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);}
+  .toast .big{font-size:60px;font-family:serif;font-weight:900;color:var(--maroon);line-height:1.2;}
+  .toast .small{color:var(--muted);margin-top:10px;font-size:14px;}
+  .toast .close{
+    margin-top:22px;padding:8px 30px;border:none;border-radius:8px;
+    background:var(--maroon);color:#fff;font-size:15px;cursor:pointer;
+  }
+  .overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:90;
+    opacity:0;pointer-events:none;transition:.25s;
+  }
+  .overlay.show{opacity:1;pointer-events:auto;}
+
+  footer{
+    background:var(--maroon-deep);color:#cbb48a;text-align:center;
+    padding:34px 24px;font-size:14px;
+  }
+  footer .foot-brand{font-family:serif;font-size:20px;color:var(--gold);letter-spacing:3px;}
+
+  @media(max-width:760px){
+    .hero h1{font-size:34px;letter-spacing:3px;}
+    .hero{padding:60px 20px 54px;}
+    .about-grid{grid-template-columns:1fr;}
+    .menu{grid-template-columns:1fr;}
+    .cta-grid{grid-template-columns:1fr;}
+    nav a{margin-left:14px;font-size:14px;}
+    nav{display:flex;flex-wrap:wrap;gap:6px;}
+    nav a{margin-left:0;padding:10px 8px;min-height:44px;display:inline-flex;align-items:center;}
+    .sec-title h2{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">漕河泾<span>·</span>大饭店</div>
+    <nav>
+      <a href="#story">招牌故事</a>
+      <a href="#menu">招牌菜</a>
+      <a href="#join">加盟</a>
+      <a href="#feedback">反馈</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <div class="seal">饭</div>
+  <h1>漕河泾大饭店</h1>
+  <div class="sub">专注 · 江北改良 · 上海本帮菜</div>
+  <div class="tag">始于上世纪 · 菜系博大精深 · 暂时无分店</div>
+  <div class="stars">★ ★ ★ ★ ★</div>
+</div>
+
+<!-- ===== 招牌故事 ===== -->
+<section id="story">
+  <div class="wrap">
+    <div class="sec-title">
+      <span class="kicker">我们的使命</span>
+      <h2>一次伟大的的菜系融合</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>漕河泾大饭店，坐落于上海漕河泾开发区腹地，是一家<span class="accent">敢于自我革命</span>的老字号。我们不满足于传统本帮菜的浓油赤酱，而是大胆引入江北厨艺的精髓，开创出<span class="accent">「江南皮、江北骨」</span>的全新味型。</p>
+        <p>浓油赤酱里，多了三分豪迈；甜咸口之间，藏着一股直爽。有人说我们不够正宗，<span class="accent">我们笑了——爱吃不吃，不吃拉倒。</span></p>
+        <p>本店郑重承诺：每一道菜，都经过江北老师傅的「改良</p>
+      </div>
+      <div class="about-box">
+        <div class="big">3:7</div>
+        <div class="lbl">糖 : 盐 黄金配比</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 招牌菜 ===== -->
+<section class="alt" id="menu">
+  <div class="wrap">
+    <div class="sec-title">
+      <span class="kicker">镇店之宝</span>
+      <h2>招牌菜</h2>
+    </div>
+    <div class="menu">
+      <div class="dish">
+        <div class="name">韭菜炒大葱· 江北加量版</div>
+        <div class="jp">本地认证：改良幅度 100%</div>
+        <div class="desc">在味道冲的基础上，把咸度拉满、分量加倍，一口下去直接起飞，乖乖隆地动。</div>
+        <div class="price">¥88 / 份</div>
+      </div>
+      <div class="dish">
+        <div class="name">响油鳝糊</div>
+        <div class="jp">全城唯一版本</div>
+        <div class="desc">在优雅的鳝糊加入美味的大便，筷子一拌，十分上头。</div>
+        <div class="price">¥68 / 份（含纸巾两包）</div>
+      </div>
+      <div class="dish">
+        <div class="name">腌笃鲜 · 江北乱炖</div>
+        <div class="jp">汤鲜味美 · 内容随机</div>
+        <div class="desc">咸肉、笋、百叶结之外，不定期加入江北风味的神秘配料，每一碗都是开盲盒。</div>
+        <div class="price">¥58 / 份</div>
+      </div>
+      <div class="dish">
+        <div class="name">异域风情 · 印度咖喱</div>
+        <div class="jp">外国名菜</div>
+        <div class="desc">专业大巴哇啦送来的美味的呕吐物咖喱饭。</div>
+        <div class="price">¥42 / 份</div>
+      </div>
+      <div class="dish">
+        <div class="name">张家浜大闸蟹</div>
+        <div class="jp">轻奢跨界</div>
+        <div class="desc">张家浜大闸蟹，下江北铁锅炖之。多了被有一番风味的臭水。</div>
+        <div class="price">¥188 / 只（仅含蟹壳）</div>
+      </div>
+      <div class="dish">
+        <div class="name">白斩鸡</div>
+        <div class="jp">鲜嫩美味，一口爆汁</div>
+        <div class="desc">白白嫩嫩的鸡肉，一咬就出水，这应该是最出名的白斩鸡）                                                                                               </div>
+        <div class="price">¥66 / 半只</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 赵师傅名言===== -->
+<section>
+  <div class="wrap">
+    <div class="manifesto">
+      <p>有人问我们：<b>“你们到底是本帮菜还是江北菜？”</b></p>
+      <p>我们只回答一句话：</p>
+      <p><b>“只要吃的人开心，我们就是成功的餐厅。”</b></p>
+      <p style="font-size:16px;color:var(--muted);margin-top:10px;">—— 漕河泾大饭店 总厨兼店长兼股东兼元首兼创始人兼CEO—————— 赵师傅</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 加盟 & 反馈 ===== -->
+<section class="alt">
+  <div class="wrap">
+    <div class="cta-grid">
+
+      <!-- 加盟按钮 -->
+      <div class="cta-card" id="join">
+        <h3>诚邀加盟</h3>
+        <p>全城仅此一家，绝不扩张？<br>不——我们欢迎有志之士，共襄盛举。</p>
+        <button class="btn" onclick="showToast('join')">加盟我们</button>
+      </div>
+
+      <!-- 客户反馈 -->
+      <div class="cta-card" id="feedback">
+        <h3>客户反馈</h3>
+        <p>您的声音对我们很重要。<br>（本条消息将进入「30天后自动删除」文件夹，石沉大海，永不见天日。）</p>
+        <div class="feedback-form">
+          <textarea id="feedbackInput" placeholder="请尽情吐槽……"></textarea>
+          <button class="btn gold" onclick="showToast('feedback')">提交反馈</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 弹窗 ===== -->
+<div class="overlay" id="overlay" onclick="hideToast()"></div>
+<div class="toast" id="toast">
+  <div class="big" id="toastBig"></div>
+  <div class="small" id="toastSmall"></div>
+  <button class="close" onclick="hideToast()">好的</button>
+</div>
+
+<footer>
+  <div class="foot-brand">漕河泾大饭店</div>
+  <p style="margin-top:8px;">地址：地铁9号线漕河泾开发区站40号口出站右转再左转的东边的西边的南边的北边</p>
+</footer>
+
+<script>
+  var toast = document.getElementById('toast');
+  var overlay = document.getElementById('overlay');
+  var toastBig = document.getElementById('toastBig');
+  var toastSmall = document.getElementById('toastSmall');
+
+  function showToast(type){
+    if(type === 'join'){
+      toastBig.textContent = '你被骗了';
+      toastSmall.textContent = '本店根本没有加盟业务。';
+    } else if(type === 'feedback'){
+      var input = document.getElementById('feedbackInput');
+      if(input && input.value.trim() !== ''){
+        toastBig.textContent = '提交完成';
+        toastSmall.textContent = '感谢您的反馈，祝您用餐愉快。';
+        input.value = '';
+      } else {
+        toastBig.textContent = '等一下';
+        toastSmall.textContent = '您还没写内容。';
+      }
+    }
+    toast.classList.add('show');
+    overlay.classList.add('show');
+  }
+
+  function hideToast(){
+    toast.classList.remove('show');
+    overlay.classList.remove('show');
+  }
+</script>
+
+</body>
+</html>
